@@ -48,7 +48,7 @@ export const employeeSave = ({ imageUrl, text, uid }) => {
             .set({ imageUrl, text })
             .then(() => {
                 dispatch({ type: EMPLOYEE_SAVE_SUCCESS});
-                Actions.employeeList({ type: 'reset' });
+                Actions.pop({ type: 'reset' });
             });
     };
 };
