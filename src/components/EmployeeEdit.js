@@ -17,9 +17,9 @@ class EmployeeEdit extends Component {
     }
 
     onButtonPress() {
-        const { imageUrl, text, shift } = this.props;
+        const { imageUrl, text } = this.props;
 
-        this.props.employeeSave({ imageUrl, text, shift, uid: this.props.employee.uid });
+        this.props.employeeSave({ imageUrl, text, uid: this.props.employee.uid });
     }
 
     onTextPress() {
@@ -76,9 +76,9 @@ class EmployeeEdit extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const { imageUrl, text, shift } = state.employeeForm;
+    const { imageUrl, text } = state.employeeForm;
 
-    return { imageUrl, text, shift };
+    return { imageUrl, text };
 
 }
 

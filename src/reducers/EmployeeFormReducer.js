@@ -6,8 +6,7 @@ import {
 
 const INITIAL_STATE = {
     imageUrl: '',
-    text: '',
-    shift: ''
+    text: ''
 };
 
 export default (state = INITIAL_STATE, action) => {

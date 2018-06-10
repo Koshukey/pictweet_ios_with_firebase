@@ -6,8 +6,8 @@ import EmployeeForm from './EmployeeForm';
 
 class EmployeeCreate extends Component {
     onButtonPress() {
-        const { imageUrl, text, shift } = this.props;
-        this.props.employeeCreate({ imageUrl, text, shift: shift || 'Monday' });
+        const { imageUrl, text } = this.props;
+        this.props.employeeCreate({ imageUrl, text });
 
     }
     render() {
@@ -28,8 +28,8 @@ class EmployeeCreate extends Component {
 
 
 const mapStateToProps = (state) => {
-    const { imageUrl, text, shift } =  state.employeeForm;
-    return { imageUrl, text, shift };
+    const { imageUrl, text } =  state.employeeForm;
+    return { imageUrl, text };
 }
 
 export default connect(mapStateToProps, {

@@ -16,12 +16,12 @@ export const employeeUpdate = ({ prop, value }) => {
     };
 };
 
-export const employeeCreate = ({ imageUrl, text, shift }) => {
+export const employeeCreate = ({ imageUrl, text }) => {
   const { currentUser } = firebase.auth();
 
   return(dispatch) => {
       firebase.database().ref(`/users/${currentUser.uid}/tweets`)
-          .push({imageUrl, text, shift})
+          .push({imageUrl, text })
           .then(() => {
               dispatch({ type: EMPLOYEE_CREATE });
               Actions.pop({ type: 'reset' })
@@ -40,12 +40,12 @@ export const employeesFetch = () => {
     };
 };
 
-export const employeeSave = ({ imageUrl, text, shift, uid }) => {
+export const employeeSave = ({ imageUrl, text, uid }) => {
     const { currentUser } = firebase.auth();
 
     return (dispatch) => {
         firebase.database().ref(`/users/${currentUser.uid}/tweets/${uid}`)
-            .set({ imageUrl, text, shift })
+            .set({ imageUrl, text })
             .then(() => {
                 dispatch({ type: EMPLOYEE_SAVE_SUCCESS});
                 Actions.employeeList({ type: 'reset' });
