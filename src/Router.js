@@ -19,7 +19,7 @@ const RouterComponent = () => {
                         onRight={() => Actions.employeeCreate()}
                         key="employeeList"
                         component={EmployeeList}
-                        title="Employees"
+                        title="Tweets"
                         initial
                     />
                     <Scene

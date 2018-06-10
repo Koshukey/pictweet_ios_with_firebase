@@ -35,6 +35,10 @@ class EmployeeList extends Component {
                 enableEmptySections
                 dataSource={this.dataSource}
                 renderRow={this.renderRow}
+                ref={ ( ref ) => this.scrollView = ref }
+                onContentSizeChange={ () => {
+                    this.scrollView.scrollToEnd( { animated: false } )
+                } }
             />
         );
 
