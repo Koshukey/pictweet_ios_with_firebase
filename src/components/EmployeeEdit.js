@@ -22,13 +22,6 @@ class EmployeeEdit extends Component {
         this.props.employeeSave({ imageUrl, text, uid: this.props.employee.uid });
     }
 
-    onTextPress() {
-        const { phone, shift } = this.props;
-
-        Communications.text(phone, `Your upcoming shift is on ${shift}`);
-
-    }
-
 
     onAccept() {
         const { uid } = this.props.employee;
@@ -51,14 +44,8 @@ class EmployeeEdit extends Component {
                 </CardSection>
 
                 <CardSection>
-                    <Button onPress={this.onTextPress.bind(this)}>
-                        Text Schedule
-                    </Button>
-                </CardSection>
-
-                <CardSection>
                     <Button onPress={() => this.setState({ showModal: !this.state.showModal })}>
-                        Fire Employee
+                        Delete
                     </Button>
                 </CardSection>
 
