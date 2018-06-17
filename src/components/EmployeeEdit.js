@@ -10,41 +10,41 @@ import firebase from "firebase";
 
 class EmployeeEdit extends Component {
 
-    state = { showModal: false };
+    state = {showModal: false};
 
     componentWillMount() {
         _.each(this.props.employee, (value, prop) => {
-            this.props.employeeUpdate({ prop, value });
+            this.props.employeeUpdate({prop, value});
         });
     }
 
     onButtonPress() {
-        const { imageUrl, text } = this.props;
+        const {imageUrl, text} = this.props;
 
-        this.props.employeeSave({ imageUrl, text, uid: this.props.employee.uid });
+        this.props.employeeSave({imageUrl, text, uid: this.props.employee.uid});
     }
 
 
     onAccept() {
-        const { uid } = this.props.employee;
-        this.props.employeeDelete({ uid });
+        const {uid} = this.props.employee;
+        this.props.employeeDelete({uid});
     }
 
     onDecline() {
-        this.setState({ showModal: false });
+        this.setState({showModal: false});
 
     }
 
-    render() {
+    renderDeleteButton() {
 
-        const { text, imageUrl, tweetId, employee } = this.props;
+        const {text, imageUrl, tweetId, employee} = this.props;
 
-        const { currentUser } = firebase.auth();
+        const {currentUser} = firebase.auth();
 
-        if ( currentUser.uid === employee["userId"]) {
+        if (currentUser.uid === employee["userId"]) {
             return (
+
                 <Card>
-                    <EmployeeForm/>
                     <CardSection>
                         <Button onPress={this.onButtonPress.bind(this)}>
                             Save Changes
@@ -64,13 +64,26 @@ class EmployeeEdit extends Component {
                     >
                         Are U sure U wanna delete this?
                     </Confirm>
-
                 </Card>
             );
-        }else{
+
+        } else {
             return null;
         }
     }
+
+
+    render() {
+
+        return (
+
+            <Card>
+                <EmployeeForm/>
+                {this.renderDeleteButton()}
+            </Card>
+
+        );
+    };
 }
 
 const mapStateToProps = (state) => {
@@ -78,7 +91,7 @@ const mapStateToProps = (state) => {
 
     return { imageUrl, text };
 
-}
+};
 
 export default connect(mapStateToProps, {
     employeeUpdate, employeeSave, employeeDelete
