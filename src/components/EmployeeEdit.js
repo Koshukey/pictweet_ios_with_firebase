@@ -37,7 +37,7 @@ class EmployeeEdit extends Component {
 
     renderDeleteButton() {
 
-        const {text, imageUrl, tweetId, employee} = this.props;
+        const {employee} = this.props;
 
         const {currentUser} = firebase.auth();
 
