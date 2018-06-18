@@ -3,7 +3,9 @@ import {
     PASSWORD_CHANGED,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAIL,
-    LOGIN_USER
+    LOGIN_USER,
+    NICKNAME_CHANGED,
+    SAVE_NICKNAME
 } from "./types";
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
@@ -20,6 +22,24 @@ export const passwordChanged = (text) => {
         type: PASSWORD_CHANGED,
         payload: text
     };
+};
+
+export const nicknameChanged = (text) => {
+    return {
+        type: NICKNAME_CHANGED,
+        payload: text
+    };
+};
+
+export const saveNickname = ({ nickname }) => {
+    return(dispatch) => {
+        // dispatch({type: SAVE_NICKNAME});
+        firebase.database().ref(`/users`)
+            .push( {nickname} )
+            .then(() => {
+                dispatch({ type : SAVE_NICKNAME});
+            })
+    }
 };
 
 export const loginUser = ({ email, password }) => {

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import reducers from './reducers';
 import ReduxThunk from 'redux-thunk';
 import firebase from 'firebase';
 import LoginForm from './components/LoginForm';
 import Router from './Router';
+import logger from 'redux-logger';
 
 
 class App extends Component {
@@ -26,7 +27,9 @@ class App extends Component {
 
     render() {
 
-        const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+        const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+        const store = createStore(reducers, {}, composeEnhancers( applyMiddleware(ReduxThunk, logger)));
 
         return (
             <Provider store={store}>
