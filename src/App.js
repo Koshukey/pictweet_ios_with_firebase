@@ -31,6 +31,8 @@ class App extends Component {
 
         const store = createStore(reducers, {}, composeEnhancers( applyMiddleware(ReduxThunk, logger)));
 
+        console.log(store.getState());
+
         return (
             <Provider store={store}>
               <Router/>

@@ -14,6 +14,8 @@ export const LOGIN_USER = 'login_user';
 
 export const SAVE_NICKNAME ='save_nickname';
 
+export const FETCH_USERID_WITH_NICKNAME ='fetch_userid_with_nickname';
+
 
 export const EMPLOYEE_UPDATE = 'employee_update';
 export const EMPLOYEE_CREATE = 'employee_create';

@@ -5,7 +5,8 @@ import {
     LOGIN_USER_FAIL,
     LOGIN_USER,
     NICKNAME_CHANGED,
-    ENROLL_NICKNAME
+    ENROLL_NICKNAME,
+    FETCH_USERID_WITH_NICKNAME
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -25,6 +26,8 @@ export default (state=INITIAL_STATE, action) => {
             return {...state, password: action.payload };
         case NICKNAME_CHANGED:
             return {...state, nickname: action.payload };
+        case FETCH_USERID_WITH_NICKNAME:
+            return action.payload;
         case LOGIN_USER:
             return {...state, loading: true, error: ''};
         case ENROLL_NICKNAME:

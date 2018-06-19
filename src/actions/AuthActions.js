@@ -5,7 +5,8 @@ import {
     LOGIN_USER_FAIL,
     LOGIN_USER,
     NICKNAME_CHANGED,
-    SAVE_NICKNAME
+    SAVE_NICKNAME,
+    FETCH_USERID_WITH_NICKNAME
 } from "./types";
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
@@ -32,12 +33,26 @@ export const nicknameChanged = (text) => {
 };
 
 export const saveNickname = ({ nickname }) => {
+
+    const { currentUser } = firebase.auth();
+
+    const userId = currentUser.uid;
+
     return(dispatch) => {
         // dispatch({type: SAVE_NICKNAME});
         firebase.database().ref(`/users`)
-            .push( {nickname} )
+            .push( {nickname, userId} )
             .then(() => {
                 dispatch({ type : SAVE_NICKNAME});
+            })
+    }
+};
+
+export const fetchUseridWithNickname = () => {
+    return(dispatch) => {
+        firebase.database().ref(`/users`)
+            .on('value', snapshot => {
+                dispatch({type:FETCH_USERID_WITH_NICKNAME, payload: snapshot.val()});
             })
     }
 };

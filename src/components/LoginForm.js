@@ -1,11 +1,34 @@
 import React, { Component } from 'react';
 import { Card, CardSection, Input, Button, Spinner } from './common';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged, nicknameChanged, loginUser, saveNickname } from "../actions";
+import { emailChanged, passwordChanged, nicknameChanged, loginUser, saveNickname, fetchUseridWithNickname } from "../actions";
 import { View, Text } from 'react-native';
+// import firebase from "firebase/index";
+import firebase from "firebase";
+
 
 
 class LoginForm extends Component {
+
+    componentWillMount() {
+
+
+        const firebaseRef = firebase.database().ref(`/users`);
+
+            firebaseRef
+            .on("value", function(snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    const childData = childSnapshot.val();
+                    const savedUserId = childData.userId;
+                    console.log(savedUserId)
+                })
+        });
+
+        // console.log(savedUserId)
+
+    }
+
+
     onEmailChange(text) {
         this.props.emailChanged(text)
     }
@@ -24,6 +47,8 @@ class LoginForm extends Component {
         this.props.loginUser({ email, password });
 
         this.props.saveNickname({nickname });
+
+
     }
 
     renderButton() {
@@ -51,6 +76,7 @@ class LoginForm extends Component {
     }
 
     enrollNickname() {
+
         return (
             <CardSection>
                 <Input
@@ -64,9 +90,6 @@ class LoginForm extends Component {
     }
 
     render() {
-
-        console.log(this.props.email);
-        console.log(this.props.nickname);
         return (
             <Card>
                 <CardSection>
@@ -115,4 +138,4 @@ const mapStateToProps = ({ auth }) => {
     return { email, password, error, loading, nickname };
 };
 
-export default connect(mapStateToProps, { emailChanged, passwordChanged, nicknameChanged, loginUser, saveNickname })(LoginForm);
+export default connect(mapStateToProps, { emailChanged, passwordChanged, nicknameChanged, loginUser, saveNickname, fetchUseridWithNickname })(LoginForm);

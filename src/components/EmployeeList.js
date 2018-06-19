@@ -1,13 +1,77 @@
 import React, { Component } from 'react';
-import { ListView } from 'react-native';
+import { ListView, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { employeesFetch } from "../actions";
 import ListItem from './ListItem';
 import _ from 'lodash';
+import Modal from "react-native-modal";
+import firebase from "firebase";
+import { CardSection, Input, Button } from './common';
+
 
 class EmployeeList extends Component {
+
+
+
+    state = {
+        isModalVisible: false,
+        nickname: ''
+    };
+
+
+    saveNickname(nickname) {
+
+        const { currentUser } = firebase.auth();
+
+        const userId = currentUser.uid;
+
+        const firebaseRef = firebase.database().ref(`/users`);
+
+        firebaseRef.push( {nickname, userId} )
+            .then(() => {})
+
+    }
+
+    checkNickname(){
+
+        //nicknameがまだ登録されていなかった場合、登録フォームを見せる
+
+
+        const { currentUser } = firebase.auth();
+        const loginUserId = currentUser.uid;
+
+        const firebaseRef = firebase.database().ref(`/users`);
+
+        var countNumber = 0;
+
+        firebaseRef
+            .on("value", function(snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    // var countNumber = 0;
+                    const childData = childSnapshot.val();
+                    const savedUserId = childData.userId;
+                    if (loginUserId === savedUserId ){
+                        countNumber += 1
+                    }
+                })
+            });
+
+        if (countNumber === 0){
+            this.setState({ isModalVisible: !this.state.isModalVisible });
+        }
+
+    }
+
+    _toggleModal = () =>
+        this.setState({ isModalVisible: !this.state.isModalVisible });
+
+
     componentWillMount() {
+
+        this.checkNickname();
+
         this.props.employeesFetch();
+
         this.createDataSource(this.props);
     }
 
@@ -31,6 +95,25 @@ class EmployeeList extends Component {
 
     render() {
         return (
+            <View>
+                <Modal isVisible={true}>
+                    <View style={styles.modalContent}>
+                        <Text>
+                            Please register your nickname!
+                        </Text>
+                        <CardSection>
+                            <Input
+                                label="Nickname"
+                                placeholder="put your nickname"
+                            />
+                        </CardSection>
+                        <TouchableOpacity>
+                            <View style={styles.button}>
+                                <Text>register</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                </Modal>
             <ListView
                 enableEmptySections
                 dataSource={this.dataSource}
@@ -40,10 +123,53 @@ class EmployeeList extends Component {
                     this.scrollView.scrollToEnd( { animated: false } )
                 } }
             />
+            </View>
         );
 
     }
 };
+
+const styles = {
+    modalContent: {
+        backgroundColor: "white",
+        padding: 22,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 4,
+        borderColor: "rgba(0, 0, 0, 0.1)",
+        height: 300
+    },
+    button: {
+        backgroundColor: "lightblue",
+        padding: 12,
+        margin: 16,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 4,
+        borderColor: "rgba(0, 0, 0, 0.1)"
+    },
+    inputStyle: {
+        color: '#000',
+        paddingRight: 5,
+        paddingLeft: 5,
+        fontSize: 18,
+        lineHeight: 23,
+        flex: 2
+    },
+    labelStyle: {
+        fontSize: 18,
+        paddingLeft: 20,
+        flex: 1
+    },
+    containerStyle: {
+        height: 40,
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center'
+    }
+
+};
+
 
 const mapStateToProps = state => {
     const employees = _.map(state.employees, (val, uid) => {
