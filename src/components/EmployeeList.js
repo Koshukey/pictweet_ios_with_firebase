@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListView, Text, TouchableOpacity, View } from 'react-native';
+import { ListView, Text, TouchableOpacity, View, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { employeesFetch } from "../actions";
 import ListItem from './ListItem';
@@ -102,13 +102,22 @@ class EmployeeList extends Component {
                             Please register your nickname!
                         </Text>
                         <CardSection>
-                            <Input
-                                label="Nickname"
-                                placeholder="put your nickname"
-                            />
+                            <View style={styles.containerStyle}>
+                                <Text style={styles.labelStyle}>Nickname</Text>
+                                <TextInput
+                                    placeholder="put your nickname"
+                                    autoCorrect={false}
+                                    style={styles.inputStyle}
+                                    value={this.state.nickname}
+                                    onChangeText={(nickname) => this.setState({nickname})}
+                                />
+                            </View>
                         </CardSection>
                         <TouchableOpacity>
-                            <View style={styles.button}>
+                            <View
+                                style={styles.button}
+                                onPress={this.saveNickname(this.state.nickname)}
+                            >
                                 <Text>register</Text>
                             </View>
                         </TouchableOpacity>
