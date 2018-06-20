@@ -28,7 +28,7 @@ class EmployeeList extends Component {
         const firebaseRef = firebase.database().ref(`/users`);
 
         firebaseRef.push( {nickname, userId} )
-            .then(() => {})
+            .then(() => {});
 
     }
 
@@ -42,28 +42,37 @@ class EmployeeList extends Component {
 
         const firebaseRef = firebase.database().ref(`/users`);
 
-        var countNumber = 0;
+         var countNumber = 0;
+
 
         firebaseRef
             .on("value", function(snapshot) {
                 snapshot.forEach(function (childSnapshot) {
-                    // var countNumber = 0;
+                        // var countNumber = 0;
                     const childData = childSnapshot.val();
                     const savedUserId = childData.userId;
                     if (loginUserId === savedUserId ){
                         countNumber += 1
+                        console.log(countNumber)
                     }
                 })
             });
 
+
+        console.log(countNumber)
+
         if (countNumber === 0){
             this.setState({ isModalVisible: !this.state.isModalVisible });
+            console.log(this.state.isModalVisible);
         }
 
+        console.log(this.state.isModalVisible);
     }
 
-    _toggleModal = () =>
-        this.setState({ isModalVisible: !this.state.isModalVisible });
+
+    _toggleModal() {
+        this.setState({isModalVisible: !this.state.isModalVisible})
+    };
 
 
     componentWillMount() {
@@ -94,9 +103,11 @@ class EmployeeList extends Component {
     }
 
     render() {
+
+        console.log(this.state.isModalVisible);
         return (
             <View>
-                <Modal isVisible={true}>
+                <Modal isVisible={this.state.isModalVisible}>
                     <View style={styles.modalContent}>
                         <Text>
                             Please register your nickname!
@@ -113,10 +124,12 @@ class EmployeeList extends Component {
                                 />
                             </View>
                         </CardSection>
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={ () => this._toggleModal()}
+                        >
                             <View
                                 style={styles.button}
-                                onPress={this.saveNickname(this.state.nickname)}
+                                onPress={() => this.saveNickname(this.state.nickname)}
                             >
                                 <Text>register</Text>
                             </View>

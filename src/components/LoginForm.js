@@ -10,24 +10,24 @@ import firebase from "firebase";
 
 class LoginForm extends Component {
 
-    componentWillMount() {
-
-
-        const firebaseRef = firebase.database().ref(`/users`);
-
-            firebaseRef
-            .on("value", function(snapshot) {
-                snapshot.forEach(function (childSnapshot) {
-                    const childData = childSnapshot.val();
-                    const savedUserId = childData.userId;
-                    console.log(savedUserId)
-                })
-        });
-
-        // console.log(savedUserId)
-
-    }
-
+    // componentWillMount() {
+    //
+    //
+    //     const firebaseRef = firebase.database().ref(`/users`);
+    //
+    //         firebaseRef
+    //         .on("value", function(snapshot) {
+    //             snapshot.forEach(function (childSnapshot) {
+    //                 const childData = childSnapshot.val();
+    //                 const savedUserId = childData.userId;
+    //                 console.log(savedUserId)
+    //             })
+    //     });
+    //
+    //     // console.log(savedUserId)
+    //
+    // }
+    //
 
     onEmailChange(text) {
         this.props.emailChanged(text)
@@ -112,7 +112,7 @@ class LoginForm extends Component {
                     />
                 </CardSection>
 
-                {this.enrollNickname()}
+                {/*{this.enrollNickname()}*/}
 
                 {this.renderError()}
 
