@@ -3,31 +3,13 @@ import { Card, CardSection, Input, Button, Spinner } from './common';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, nicknameChanged, loginUser, saveNickname, fetchUseridWithNickname } from "../actions";
 import { View, Text } from 'react-native';
-// import firebase from "firebase/index";
 import firebase from "firebase";
 
 
 
 class LoginForm extends Component {
 
-    // componentWillMount() {
-    //
-    //
-    //     const firebaseRef = firebase.database().ref(`/users`);
-    //
-    //         firebaseRef
-    //         .on("value", function(snapshot) {
-    //             snapshot.forEach(function (childSnapshot) {
-    //                 const childData = childSnapshot.val();
-    //                 const savedUserId = childData.userId;
-    //                 console.log(savedUserId)
-    //             })
-    //     });
-    //
-    //     // console.log(savedUserId)
-    //
-    // }
-    //
+
 
     onEmailChange(text) {
         this.props.emailChanged(text)
@@ -46,7 +28,7 @@ class LoginForm extends Component {
 
         this.props.loginUser({ email, password });
 
-        this.props.saveNickname({nickname });
+        // this.props.saveNickname({nickname });
 
 
     }

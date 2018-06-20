@@ -21,6 +21,8 @@ class EmployeeList extends Component {
 
     saveNickname(nickname) {
 
+        console.log("am I called ? smack bitch");
+
         const { currentUser } = firebase.auth();
 
         const userId = currentUser.uid;
@@ -29,6 +31,8 @@ class EmployeeList extends Component {
 
         firebaseRef.push( {nickname, userId} )
             .then(() => {});
+
+        this._toggleModal()
 
     }
 
@@ -125,15 +129,13 @@ class EmployeeList extends Component {
                                 />
                             </View>
                         </CardSection>
-                        <TouchableOpacity
-                            onPress={ () => this._toggleModal()}
-                        >
-                            <View
+                        <TouchableOpacity>
+                            <TouchableOpacity
                                 style={styles.button}
                                 onPress={() => this.saveNickname(this.state.nickname)}
                             >
                                 <Text>register</Text>
-                            </View>
+                            </TouchableOpacity>
                         </TouchableOpacity>
                     </View>
                 </Modal>
