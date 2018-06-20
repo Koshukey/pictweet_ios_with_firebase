@@ -46,27 +46,28 @@ class EmployeeList extends Component {
 
 
         firebaseRef
+
             .on("value", function(snapshot) {
+
+                var self = this;
+
                 snapshot.forEach(function (childSnapshot) {
-                        // var countNumber = 0;
+
                     const childData = childSnapshot.val();
                     const savedUserId = childData.userId;
+
                     if (loginUserId === savedUserId ){
                         countNumber += 1
-                        console.log(countNumber)
                     }
-                })
-            });
 
+                });
 
-        console.log(countNumber)
+                if (countNumber === 0){
+                    self.setState({ isModalVisible: true });
+                }
 
-        if (countNumber === 0){
-            this.setState({ isModalVisible: !this.state.isModalVisible });
-            console.log(this.state.isModalVisible);
-        }
+            }.bind(this));
 
-        console.log(this.state.isModalVisible);
     }
 
 
