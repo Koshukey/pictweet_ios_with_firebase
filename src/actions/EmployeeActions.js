@@ -26,7 +26,7 @@ export const employeeCreate = ({ imageUrl, text }) => {
   const tweetId = Math.round(Math.random() * 1000);
 
   return(dispatch) => {
-      // firebase.database().ref(`/users/${currentUser.uid}/tweets`)
+
       firebase.database().ref(`/tweets`)
 
           .push({imageUrl, text, userId, tweetId })
