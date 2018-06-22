@@ -8,13 +8,20 @@ import AwesomeButtonRick from 'react-native-really-awesome-button';
 class ListItem extends Component {
 
 
-    onRowPress() {
+
+
+onRowPress() {
         Actions.employeeEdit({ employee: this.props.employee });
     }
 
 
     onDetailButtonPress() {
-        Actions.showDetail();
+
+        const { imageUrl, text, nickname } = this.props.employee;
+        console.log(text);
+        console.log(nickname);
+
+        Actions.showDetail(imageUrl, text, nickname);
 
     }
 
