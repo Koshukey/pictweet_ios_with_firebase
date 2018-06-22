@@ -3,12 +3,19 @@ import { Text, TouchableWithoutFeedback, View, Image, ImageBackground  } from 'r
 // import { CardSection } from "./common";
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
+import AwesomeButtonRick from 'react-native-really-awesome-button';
 
 class ListItem extends Component {
 
 
     onRowPress() {
         Actions.employeeEdit({ employee: this.props.employee });
+    }
+
+
+    onDetailButtonPress() {
+        Actions.showDetail();
+
     }
 
 
@@ -20,9 +27,10 @@ class ListItem extends Component {
         console.log(this.props.employee);
         console.log(this.props);
 
-        const { container, child, imageStyle, textStyle, nicknameStyle } = styles;
+        const { container, child, imageStyle, textStyle, nicknameStyle, detailButtonStyle } = styles;
 
         return (
+            <View>
             <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
                 <View　style={container}>
 
@@ -34,6 +42,16 @@ class ListItem extends Component {
 
                 </View>
             </TouchableWithoutFeedback>
+            <AwesomeButtonRick
+                size="small"
+                type="primary"
+                width={380}
+                textColor="#FFFFFF"
+                height={40}
+                backgroundColor="#1E90FF"
+                onPress={this.onDetailButtonPress.bind(this)}
+            >show detail</AwesomeButtonRick>
+            </View>
         );
     }
 }
@@ -74,7 +92,10 @@ const styles = {
         color: '#ffffff',
         fontSize: 22,
         marginTop:230
+    },
+    detailButtonStyle: {
+        height: 5
     }
-}
+};
 
 export default ListItem;

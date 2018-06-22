@@ -4,6 +4,7 @@ import LoginForm from './components/LoginForm';
 import EmployeeList from './components/EmployeeList';
 import EmployeeCreate from './components/EmployeeCreate';
 import EmployeeEdit from './components/EmployeeEdit';
+import ShowDetail from './components/ShowDetail';
 
 
 const RouterComponent = () => {
@@ -31,6 +32,11 @@ const RouterComponent = () => {
                         key="employeeEdit"
                         component={EmployeeEdit}
                         title = "Edit Employee"
+                    />
+                    <Scene
+                        key="showDetail"
+                        component={ShowDetail}
+                        title ="Detail"
                     />
 
                 </Scene>
