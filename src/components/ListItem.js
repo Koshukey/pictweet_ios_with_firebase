@@ -6,67 +6,19 @@ import firebase from 'firebase';
 
 class ListItem extends Component {
 
-    state = {
-        nickname:''
-    };
-
-    componentWillMount() {
-        this.fetchNickname();
-    }
 
     onRowPress() {
         Actions.employeeEdit({ employee: this.props.employee });
-    }
-
-    fetchNickname() {
-
-        const userDataRef = firebase.database().ref(`/users`);
-
-        const tweetDataRef = firebase.database().ref(`/tweets`);
-
-        var savedUserId ='';
-
-        tweetDataRef.on("value", function(snapshot) {
-
-            var self = this;
-
-            snapshot.forEach(function (children) {
-                const childData = children.val();
-                 savedUserId = childData.userId;
-
-                 console.log("savedUserid:"+savedUserId)
-
-            }
-            );
-
-                userDataRef.orderByChild(`userId`).equalTo(savedUserId).on("value", function(snapshot) {
-
-                    snapshot.forEach(function(child) {
-
-                        const nickname = child.val()["nickname"];
-
-                        console.log("am i called??");
-
-                        console.log(child.val())
-                        console.log(nickname);
-
-                        self.setState({ nickname: nickname});
-                    });
-
-                });
-
-
-        }.bind(this)
-        );
-
-
     }
 
 
     render() {
 
 
-        const { imageUrl, text } = this.props.employee;
+        const { imageUrl, text, nickname } = this.props.employee;
+
+        console.log(this.props.employee);
+        console.log(this.props);
 
         const { container, child, imageStyle, textStyle, nicknameStyle } = styles;
 
@@ -76,7 +28,7 @@ class ListItem extends Component {
 
                     <ImageBackground style={imageStyle} source={{uri: imageUrl }}>
                         <Text style={textStyle}>{ text }</Text>
-                        <Text style={nicknameStyle}>{ this.state.nickname }</Text>
+                        <Text style={nicknameStyle}>{ nickname }</Text>
 
                     </ImageBackground>
 

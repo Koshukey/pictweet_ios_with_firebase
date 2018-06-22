@@ -23,13 +23,31 @@ export const employeeCreate = ({ imageUrl, text }) => {
 
   const userId = currentUser.uid;
 
+    const userDataRef = firebase.database().ref(`/users`);
+
+    const tweetDataRef = firebase.database().ref(`/tweets`);
+
+    var nickname = '';
+
+
   const tweetId = Math.round(Math.random() * 1000);
+
+    userDataRef.orderByChild(`userId`).equalTo(userId).on("value", function(snapshot) {
+
+        snapshot.forEach(function(child) {
+
+            const fetchednickname = child.val()["nickname"];
+
+            nickname = fetchednickname
+        });
+
+    });
 
   return(dispatch) => {
 
       firebase.database().ref(`/tweets`)
 
-          .push({imageUrl, text, userId, tweetId })
+          .push({imageUrl, text, userId, tweetId, nickname })
           .then(() => {
               dispatch({ type: EMPLOYEE_CREATE });
               Actions.pop({ type: 'reset' })
