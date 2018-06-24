@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardSection, Button } from "./common";
 import { connect } from 'react-redux';
 import { Text, TouchableWithoutFeedback, View, Image, ImageBackground  } from 'react-native';
-
+import ChatForm from './ChatForm';
 
 const ShowDetail= (imageUrl, text, nickname) => {
 
@@ -23,9 +23,9 @@ const ShowDetail= (imageUrl, text, nickname) => {
                         <Text style={nicknameStyle}>aaaa</Text>
 
                     </ImageBackground>
-
                 </View>
             </TouchableWithoutFeedback>
+            <ChatForm/>
         </View>
         )
 
