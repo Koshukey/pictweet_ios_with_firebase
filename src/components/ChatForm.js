@@ -5,18 +5,33 @@ import { connect } from 'react-redux';
 import { Container, Header, Content, Item, Input, Button, Text } from 'native-base';
 
 class ChatForm extends Component {
+
+
+    state = {
+        comment: ''
+    };
+
+    saveComment() {
+
+    }
+
+
     render() {
+        console.log(this.state);
+
         return (
             <View style={styles.formStyle}>
             <Container>
                 <Content>
                     <Item style={styles.itemStyle} rounded>
-                        <Input placeholder='put comment here'/>
+                        <Input placeholder='put comment here'
+                               onChangeText={(comment) => this.setState({comment})}
+                        />
                     </Item>
                     <Button
                         style={styles.buttonStyle}
                         primary>
-                        <Text> Success </Text>
+                        <Text> 送信 </Text>
                     </Button>
                 </Content>
             </Container>
