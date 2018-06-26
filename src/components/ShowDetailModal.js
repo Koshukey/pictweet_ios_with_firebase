@@ -13,31 +13,24 @@ class ShowDetailModal extends Component {
 
     render() {
 
-
-
         const { tweetId, nickname, imageUrl, text } = this.props;
         const { container, child, imageStyle, textStyle, nicknameStyle, detailButtonStyle } = styles;
 
-console.log(imageUrl);
-        console.log(this.props)
         return(
             <View>
             <Modal isVisible={this.props.isModalVisible}>
                 <TouchableWithoutFeedback>
                     <View　style={container}>
-                        {/*<ImageBackground style={imageStyle} source={{uri: imageUrl }}>*/}
+                        <ImageBackground style={imageStyle} source={{uri: imageUrl }}>
 
-                            {/*<Text style={textStyle}>{text}</Text>*/}
-                            {/*<Text style={nicknameStyle}>{nickname}</Text>*/}
+                            <Text style={textStyle}>{text}</Text>
+                            <Text style={nicknameStyle}>{nickname}</Text>
 
-                        {/*</ImageBackground>*/}
-                        <Image style={imageStyle} source={{uri: imageUrl}}>
-                        </Image>
+                        </ImageBackground>
+
                     </View>
                 </TouchableWithoutFeedback>
                 <View style={styles.modalContent}>
-                    <Text style={textStyle}>{text}</Text>
-                    <Text style={nicknameStyle}>{nickname}</Text>
                 <TouchableOpacity
                     style={styles.button}
                     onPress={this.props._toggleModal}
@@ -84,9 +77,7 @@ const styles = {
         textAlign:   'center'
     },
     imageStyle: {
-        height: 300,
-        flex: 1,
-        width: null
+        height: 100
     },
     textStyle: {
         zIndex: 2,
@@ -94,9 +85,7 @@ const styles = {
         textShadowColor: 'rgba(0, 0, 0, 0.75)',
         textShadowOffset: {width: -1, height: 1},
         textShadowRadius: 10,
-        // color: '#ffffff',
-        color: '#000000',
-
+        color: '#ffffff',
         fontSize: 27
     },
     nicknameStyle: {
@@ -107,7 +96,7 @@ const styles = {
         textShadowRadius: 10,
         color: '#ffffff',
         fontSize: 22,
-        marginTop:230
+        marginTop:10
     },
 
 };
