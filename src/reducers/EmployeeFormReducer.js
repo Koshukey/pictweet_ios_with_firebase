@@ -6,7 +6,9 @@ import {
 
 const INITIAL_STATE = {
     imageUrl: '',
-    text: ''
+    text: '',
+    tweetId:'',
+    nickname:''
 };
 
 export default (state = INITIAL_STATE, action) => {

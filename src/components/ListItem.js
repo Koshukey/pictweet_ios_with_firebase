@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import { Text, TouchableWithoutFeedback, View, Image, ImageBackground  } from 'react-native';
 // import { CardSection } from "./common";
+import ShowDetailModal from './ShowDetailModal';
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 import AwesomeButtonRick from 'react-native-really-awesome-button';
+import Modal from 'react-native-modal';
 
 class ListItem extends Component {
 
+    state = {
+        isModalVisible: false
+    };
 
 
 
-onRowPress() {
+　　onRowPress() {
         Actions.employeeEdit({ employee: this.props.employee });
     }
 
@@ -25,11 +30,18 @@ onRowPress() {
 
     }
 
+    _toggleModal() {
+        // this.setState({isModalVisible: false})
+        this.setState({isModalVisible: !this.state.isModalVisible})
+
+        console.log(this.props.isModalVisible)
+    };
+
 
     render() {
 
 
-        const { imageUrl, text, nickname } = this.props.employee;
+        const { imageUrl, text, nickname, tweetId } = this.props.employee;
 
         console.log(this.props.employee);
         console.log(this.props);
@@ -56,8 +68,19 @@ onRowPress() {
                 textColor="#FFFFFF"
                 height={40}
                 backgroundColor="#1E90FF"
-                onPress={this.onDetailButtonPress.bind(this)}
+                // onPress={this.onDetailButtonPress.bind(this)}
+                onPress={() =>  {this.setState({isModalVisible: true})}}
+
             >show detail</AwesomeButtonRick>
+                <ShowDetailModal
+                    isModalVisible={this.state.isModalVisible}
+                    tweetId={tweetId}
+                    nickname={nickname}
+                    text={text}
+                    imageUrl={imageUrl}
+                    _toggleModal={this._toggleModal.bind(this)}
+                />
+
             </View>
         );
     }
