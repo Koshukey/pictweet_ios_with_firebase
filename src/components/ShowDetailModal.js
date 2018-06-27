@@ -3,6 +3,9 @@ import Modal from "react-native-modal";
 import { Text, TouchableWithoutFeedback, View,
     Image, ImageBackground, TouchableOpacity  } from 'react-native';
 import ChatForm from './ChatForm';
+import ChatList from "./ChatList";
+import {connect} from "react-redux";
+
 
 
 
@@ -11,9 +14,8 @@ import ChatForm from './ChatForm';
 class ShowDetailModal extends Component {
 
 
-
-
     render() {
+
 
         const { tweetId, nickname, imageUrl, text } = this.props;
         const { container, child, imageStyle, textStyle, nicknameStyle, detailButtonStyle } = styles;
@@ -32,10 +34,16 @@ class ShowDetailModal extends Component {
 
                     </View>
                 </TouchableWithoutFeedback>
-                {/*<ChatForm/>*/}
 
                 <View style={styles.modalContent}>
-                    <ChatForm/>
+                    <ChatList/>
+                    <ChatForm
+                        tweetId = {this.props.tweetId}
+                        nickname = {this.props.nickname}
+                        imageUrl = {this.props.imageUrl}
+                        text = {this.props.text}
+
+                    />
 
                     <TouchableOpacity
                     style={styles.button}

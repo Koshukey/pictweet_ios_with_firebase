@@ -2,7 +2,8 @@ import {
     EMPLOYEE_UPDATE,
     EMPLOYEE_CREATE,
     EMPLOYEES_FETCH_SUCCESS,
-    EMPLOYEE_SAVE_SUCCESS
+    EMPLOYEE_SAVE_SUCCESS,
+    COMMENTS_FETCH_SUCCESS
 } from './types';
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
@@ -19,7 +20,6 @@ export const employeeUpdate = ({ prop, value }) => {
 export const employeeCreate = ({ imageUrl, text }) => {
   const { currentUser } = firebase.auth();
 
-  console.log(currentUser.uid);
 
   const userId = currentUser.uid;
 
@@ -65,6 +65,16 @@ export const employeesFetch = () => {
             });
     };
 };
+
+export const commentsFetch = () => {
+    return(dispatch) => {
+        firebase.database().ref(`/comments`)
+            .on('value', snapshot => {
+                dispatch({type: COMMENTS_FETCH_SUCCESS, payload: snapshot.val()});
+            });
+    };
+
+}
 
 export const employeeSave = ({ imageUrl, text, uid }) => {
     const { currentUser } = firebase.auth();

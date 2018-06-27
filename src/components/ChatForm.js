@@ -3,6 +3,7 @@ import { View } from 'react-native';
 // import { CardSection, Input } from "./common";
 import { connect } from 'react-redux';
 import { Container, Header, Content, Item, Input, Button, Text } from 'native-base';
+import firebase from "firebase";
 
 class ChatForm extends Component {
 
@@ -11,13 +12,21 @@ class ChatForm extends Component {
         comment: ''
     };
 
-    saveComment() {
+    saveComment(comment) {
+        const { tweetId, nickname} = this.props;
+
+        const firebaseRef = firebase.database().ref(`/comments`);
+
+        firebaseRef.push( {tweetId, nickname, comment })
+            .then(() => {});
 
     }
 
 
     render() {
         console.log(this.state);
+
+        console.log(this.props.tweetId)
 
         return (
             <View style={styles.formStyle}>
@@ -30,6 +39,7 @@ class ChatForm extends Component {
                     </Item>
                     <Button
                         style={styles.buttonStyle}
+                        onPress={() => {this.saveComment(this.state.comment)}}
                         primary>
                         <Text> 送信 </Text>
                     </Button>

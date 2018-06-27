@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ListView, Text, TouchableOpacity, View, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { employeesFetch } from "../actions";
+
 import ListItem from './ListItem';
 import _ from 'lodash';
 import Modal from "react-native-modal";
@@ -21,7 +22,6 @@ class EmployeeList extends Component {
 
     saveNickname(nickname) {
 
-        console.log("am I called ? smack bitch");
 
         const { currentUser } = firebase.auth();
 
@@ -86,6 +86,9 @@ class EmployeeList extends Component {
 
         this.props.employeesFetch();
 
+        //it is just debug
+
+
         this.createDataSource(this.props);
     }
 
@@ -108,9 +111,7 @@ class EmployeeList extends Component {
     }
 
     render() {
-        console.log(this.props);
 
-        console.log(this.state.isModalVisible);
         return (
             <View>
                 <Modal isVisible={this.state.isModalVisible}>
