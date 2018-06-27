@@ -33,12 +33,8 @@ class ChatList extends Component {
                     if( tweetId === commentId) {
 
                         comments.push(comment);
-                        console.log(comment)
 
                     }
-                    console.log(tweetId)
-                    console.log(commentId)
-                    console.log(comments)
 
                 })
                 this.setState({commentsState: comments});
@@ -53,17 +49,11 @@ class ChatList extends Component {
 
         const stateCommentArray = this.state.commentsState;
 
-        // console.log(stateCommentArray);
-        //
-        // for (var i=0; i<stateCommentArray.length;i++){
-        //
-        //     console.log(stateCommentArray[i])
-        // }
-const stateCommentArrayNew = [];
+
+        const stateCommentArrayNew = [];
 
         for (var i=0; i<stateCommentArray.length;i++){
 
-            // console.log("fuck")
 
             stateCommentArrayNew.push(
                 <Text>
