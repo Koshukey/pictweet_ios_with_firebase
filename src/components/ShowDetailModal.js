@@ -36,7 +36,10 @@ class ShowDetailModal extends Component {
                 </TouchableWithoutFeedback>
 
                 <View style={styles.modalContent}>
-                    <ChatList/>
+                    <ChatList
+                        tweetId = {this.props.tweetId}
+                        nickname = {this.props.nickname}
+                    />
                     <ChatForm
                         tweetId = {this.props.tweetId}
                         nickname = {this.props.nickname}

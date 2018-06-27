@@ -14,17 +14,31 @@ class ChatList extends Component {
 
 
     componentWillMount() {
+       const { tweetId, nickname } = this.props;
+
         var commentsArray =[];
         var comments = [];
+        var commentId ='';
+        var comment = '';
         firebase.database().ref(`/comments`)
             .on('value', snapshot => {
                 snapshot.forEach(function (childSnapshot) {
 
                     const commentData = childSnapshot.val();
 
-                    var comment = commentData["comment"];
+                    comment = commentData["comment"];
+                     commentId = commentData['tweetId'];
                     commentsArray.push(commentData);
-                    comments.push(comment);
+
+                    if( tweetId === commentId) {
+
+                        comments.push(comment);
+                        console.log(comment)
+
+                    }
+                    console.log(tweetId)
+                    console.log(commentId)
+                    console.log(comments)
 
                 })
                 this.setState({commentsState: comments});
