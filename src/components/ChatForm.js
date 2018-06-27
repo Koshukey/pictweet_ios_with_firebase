@@ -44,9 +44,9 @@ class ChatForm extends Component {
 
 const styles = {
     formStyle: {
-        marginTop:420,
-        height: 300,
-        // flex: 1
+        marginTop:350,
+        height: 40,
+        flex: 1
         // backgroundColor:'#ffffff'
     },
     itemStyle: {

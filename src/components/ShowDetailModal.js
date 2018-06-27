@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Modal from "react-native-modal";
 import { Text, TouchableWithoutFeedback, View,
     Image, ImageBackground, TouchableOpacity  } from 'react-native';
+import ChatForm from './ChatForm';
+
 
 
 
@@ -30,8 +32,12 @@ class ShowDetailModal extends Component {
 
                     </View>
                 </TouchableWithoutFeedback>
+                {/*<ChatForm/>*/}
+
                 <View style={styles.modalContent}>
-                <TouchableOpacity
+                    <ChatForm/>
+
+                    <TouchableOpacity
                     style={styles.button}
                     onPress={this.props._toggleModal}
                 >
