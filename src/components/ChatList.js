@@ -36,30 +36,48 @@ class ChatList extends Component {
 
 
     render() {
-        console.log(this.state.commentsState);
-
-        // this.state.commentsState.map(function (value) {
-        //     console.log(value);
-        // })
-        //
 
         const stateCommentArray = this.state.commentsState;
 
+        // console.log(stateCommentArray);
+        //
+        // for (var i=0; i<stateCommentArray.length;i++){
+        //
+        //     console.log(stateCommentArray[i])
+        // }
+const stateCommentArrayNew = [];
+
+        for (var i=0; i<stateCommentArray.length;i++){
+
+            // console.log("fuck")
+
+            stateCommentArrayNew.push(
+                <Text>
+                    {stateCommentArray[i]}
+                </Text>
+            );
+        }
+　　　　
+        console.log(stateCommentArrayNew);
+
+
     return(
 
-        <View>
-
-            {/*{*/}
-                {/*stateCommentArray.map(function (comment) {*/}
+        <View style={styles.containerStyle}>
 
 
-                    {/*return <Text>{comment}</Text>*/}
-                {/*})*/}
-
-            {/*}*/}
+            {stateCommentArrayNew}
 
         </View>
         )
+    }
+
+}
+
+const styles = {
+    containerStyle: {
+        height: 200,
+        color: '#ffffff'
     }
 
 }
