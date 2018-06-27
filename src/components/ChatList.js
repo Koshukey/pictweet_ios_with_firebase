@@ -80,7 +80,7 @@ class ChatList extends Component {
 
 const styles = {
     containerStyle: {
-        height: 200,
+        height: 30,
         color: '#ffffff'
     }
 

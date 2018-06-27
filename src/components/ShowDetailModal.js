@@ -52,7 +52,7 @@ class ShowDetailModal extends Component {
                     style={styles.button}
                     onPress={this.props._toggleModal}
                 >
-                    <Text>push</Text>
+                    <Text>close</Text>
                 </TouchableOpacity>
                 </View>
             </Modal>
