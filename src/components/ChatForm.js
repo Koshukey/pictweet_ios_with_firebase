@@ -15,9 +15,44 @@ class ChatForm extends Component {
     saveComment(comment) {
         const { tweetId, nickname} = this.props;
 
+        const { currentUser } = firebase.auth();
+
+        const userId = currentUser.uid;
+
+        const firebaseUsersRef = firebase.database().ref(`/users`);
+
+        const loginUserName = '';
+
+        var savedUserId = '';
+
+        var  savedUserNickname = '';
+
+        firebaseUsersRef
+            .on("value", function(snapshot) {
+
+            snapshot.forEach(function (childSnapshot) {
+
+                const childData = childSnapshot.val();
+                 savedUserId = childData.userId;
+
+                if( userId === savedUserId ) {
+                     savedUserNickname = childData.nickname;
+                }
+
+
+            });
+
+            console.log(savedUserNickname);
+
+        });
+
+
+
+
+
         const firebaseRef = firebase.database().ref(`/comments`);
 
-        firebaseRef.push( {tweetId, nickname, comment })
+        firebaseRef.push( {tweetId, savedUserNickname, comment })
             .then(() => {});
 
     }

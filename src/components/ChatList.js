@@ -29,7 +29,7 @@ class ChatList extends Component {
 
                     comment = commentData["comment"];
                      commentId = commentData['tweetId'];
-                     commentNickname = commentData['nickname'];
+                     commentNickname = commentData['savedUserNickname'];
 
                     if( tweetId === commentId) {
 
