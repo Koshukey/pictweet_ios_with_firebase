@@ -9,7 +9,8 @@ class ChatForm extends Component {
 
 
     state = {
-        comment: ''
+        comment: '',
+        shouldDisableButton: false
     };
 
     saveComment(comment) {
@@ -47,13 +48,12 @@ class ChatForm extends Component {
         });
 
 
-
-
-
         const firebaseRef = firebase.database().ref(`/comments`);
 
         firebaseRef.push( {tweetId, savedUserNickname, comment })
             .then(() => {});
+
+        // this.setState({shouldDisableButton : true})
 
     }
 
@@ -75,6 +75,7 @@ class ChatForm extends Component {
                     <Button
                         style={styles.buttonStyle}
                         onPress={() => {this.saveComment(this.state.comment)}}
+                        disabled={this.state.shouldDisableButton}
                         primary>
                         <Text> 送信 </Text>
                     </Button>
